@@ -52,7 +52,7 @@ To install the required dependencies for this project, run the following command
 
 6. If everything is installed properly, you need to open terminal and put this command:
     ```
-    streamlit run main.py
+    streamlit run App/main.py
     ```
 
 ## Usage
