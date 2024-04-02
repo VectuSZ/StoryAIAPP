@@ -5,9 +5,9 @@ class StoryGenerator:
         self.tokenizer = GPT2Tokenizer.from_pretrained(model_name_or_path)
         self.model = GPT2LMHeadModel.from_pretrained(model_name_or_path)
 
-    def generate_story(self, theme, num_sentences):
+    def generate_story(self, theme, num_sentences, model_name_or_path):
         input_ids = self.tokenizer.encode(theme, return_tensors='pt')
-        max_length = num_sentences * 50  # Adjust the length based on the desired number of sentences
+        max_length = (num_sentences + 1) * 50  # Adjust the length based on the desired number of sentences
 
         # Generate text
         output = self.model.generate(input_ids, max_length=max_length, num_return_sequences=1, temperature=0.7)
@@ -15,7 +15,12 @@ class StoryGenerator:
         # Decode and format generated text
         generated_text = self.tokenizer.decode(output[0], skip_special_tokens=True)
         sentences = nltk.sent_tokenize(generated_text)
+        sentences = sentences[1:]
         sentences = sentences[:num_sentences]  # Ensure exactly num_sentences are returned
         story = ' '.join(sentences)
+
+        if model_name_or_path != "gpt2":
+            self.tokenizer.save_pretrained(model_name_or_path)
+            self.model.save_pretrained(model_name_or_path)
 
         return story

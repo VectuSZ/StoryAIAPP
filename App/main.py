@@ -8,9 +8,11 @@ def main():
         layout="wide",
     )
 
+    model_name_or_path="C:/Users/mateu/gpt2"
+
     # Create ImageGenerator, StoryGenerator and VoiceGenerator instance
     image_generator = ImageGenerator(apikey=openai_apikey)
-    story_generator = StoryGenerator(model_name_or_path="gpt2")
+    story_generator = StoryGenerator(model_name_or_path=model_name_or_path)
     voice_generator = VoiceGenerator(apikey=elevenlabs_apikey)
 
     # Set title``
@@ -27,7 +29,8 @@ def main():
     )
 
     # User inputs
-    theme = st.text_input("Enter a description and app will create a story based on it")
+    user_input = st.text_input("Enter a description and app will create a story based on it")
+    theme = "Tell an interesing and short (maximum 5 sentences) story about " + user_input
     num_of_sentences = st.number_input("Select number of images for your story", min_value=1, max_value=5, value=1)
 
     # Button to generate images
