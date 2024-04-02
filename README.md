@@ -63,3 +63,5 @@ To install the required dependencies for this project, run the following command
 3. Enter number of images you want to display (This many images your story will have) (Maximum number of images is 5 due to DallE limit)
 
 4. Press "Generate images and voice" and wait a second until your story will be displayed in the bottom of the page and until you hear your story in a background.
+
+   NOTE: If you are not using gpt2 model locally then you have to change model_name_or_path variable in main.py to "gpt2"
